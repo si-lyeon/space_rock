@@ -75,6 +75,7 @@ func change_state(new_state : int) -> void:
 	state = new_state
 
 func get_input() -> void:
+	$Exhaust.emitting = false
 	thrust = Vector2.ZERO
 	if state in [DEAD, INIT]:
 		return
@@ -82,6 +83,7 @@ func get_input() -> void:
 		thrust = transform.x * engine_power
 		if not $EngineSound.playing:
 			$EngineSound.play()
+		$Exhaust.emitting = true
 	else:
 		$EngineSound.stop()
 	rotation_dir = Input.get_axis("rotate_left", "rotate_right")
